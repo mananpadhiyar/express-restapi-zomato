@@ -1,0 +1,73 @@
+as per user filter , we need to show data
+
+=> let { mealType , cuisine , location , hcost , lcost , page, sort} =  request.body
+
+mealType => whenever we click On mealType from home page
+
+cuisine => here we can select multiple option for that we will use an array later
+
+location => by that location restaurant will show
+
+costForTwo(hcost , lcost) => we gonna use mongoose operator $gt and $lt
+
+sort => we gonna use sort method here => asceding , disceding
+
+$in => https://www.mongodb.com/docs/manual/reference/operator/query/in/
+
+page => pagenation
+
+ let { mealType , cuisine , location , hcost , lcost , page, sort} =  request.body
+
+note: we need to use like this 
+
+page = page ? page : 1
+sort = sort ? sort : 1  // 1 => asceding , -1 => disceding
+
+let payload = {}
+const itemPerPage = 2 
+
+let startIndex = itemPerPage * page - itemPerPage
+               = 2 * 3 - 2
+               = 4
+
+let endIndex = itemPerPage * page 
+             = 2 * 3
+             = 6
+
+// if page number given , same page number , else byDefault use page 1 
+
+
+we gonna use directly why cause we have already has declare in let variable , we can't able 
+to use there const cause we are gonna reuse that variable 
+
+    let filter =  {}   //payload
+
+      => this emty object will hold all condition user will apply to search the filter 
+      => we will use find() method it is mongoDB method
+      => find() => promise reslove => then , reject => catcch
+
+   ==> this how need to check ===> "cuisine" : [1, 4]
+      
+  let itemPerPage = 2
+
+     // 2 item should be displayed at one page
+
+  let startIndex = itemPerPage * page - itemPerPage 
+                 = 2 * 3 - 2 
+                 = 4
+ => here page => user have select page number
+
+  let endIndex = itemPerPage * page   
+               =  2 * 3
+               =  6
+              
+   .then((response) =>  {
+         let filteredResponse = response.slice(startIndex , endIndex)
+   } )   
+
+   // from where to start  = 
+
+
+
+   // mealtype => first we need mealtype number by that we need to show mealtype to the user
+   // example = breakfast has id=2 so we need to show as per that number
